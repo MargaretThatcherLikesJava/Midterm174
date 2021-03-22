@@ -11,4 +11,33 @@ package People;
  */
 public class Message {
     
+    private final Person _sender;
+    private final Person _recipient;
+    private final String _text;
+    
+    public Message(Person sender, Person recipient, String text) {
+        _sender = sender;
+        _recipient = recipient;
+        _text = text;
+    }
+    
+    public Person getSender() {
+        return _sender;
+    }
+    
+    public Person getRecipient() {
+        return _recipient;
+    }
+    
+    public String getText() {
+        return _text;
+    }
+    
+    public String toString() {
+        String displaySender = "Sender: " + _sender;
+        String displayRecipient = "Recipient: " + _recipient;
+        String displayText = "Text: " + _text;
+        return displaySender + "\n" + displayRecipient + "\n" + displayText;
+    }
+    
 }

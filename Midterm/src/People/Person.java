@@ -11,37 +11,40 @@ import Interactions.*;
  *
  * @author chee
  */
-public class Person implements Friendable, Messagable {
+public class Person {
     
     private String _firstName;
     private String _lastName;
-    private static int _id = 0;
+    private static int _id;
     protected ArrayList<Person> _friendsList = new ArrayList<Person>();
     protected ArrayList<String> _messagesList = new ArrayList<String>();
     protected ArrayList<Person> _blockedList = new ArrayList<Person>();
     
     public Person(String firstName, String lastName) {
-        
         _firstName = firstName;
         _lastName = lastName;
-        _id++;
-        
+        _id++;       
     }
     
+    public String getFirstName() {
+        return _firstName;
+    }
+    
+    public String getLastName() {
+        return _lastName;
+    }
+    
+    public int getId() {
+        return _id;
+    }
     
     /**
      * Compares two people objects based on their first and last name
-     * @param x
-     * @param y
-     * @return 
+     * @param p
+     * @return boolean
      */
     public boolean equals(Person p) {
-        boolean isEquals = false;
-        if (getClass() == p.getClass()){
-            isEquals = true;
-        } else {
-            isEquals = false;
-        }
+        boolean isEquals = this._firstName.equals(p._firstName) && this._lastName.equals(p._lastName);
         return isEquals;
     }
     
@@ -50,7 +53,6 @@ public class Person implements Friendable, Messagable {
      * @param p
      * @return 
      */
-    
     public boolean isBlocked(Person p) {
         boolean blocked = false;
         if (_blockedList == null) { // if blocked list empty, not blocked
@@ -101,13 +103,14 @@ public class Person implements Friendable, Messagable {
         return addedFriend;
     }
     
-    //@Override
     public String toString() {
+        String displayFirstName = _firstName;
+        String displayLastName = _lastName;
+        String displayId = "ID: " + _id;
         String displayFList = "Friends List: " + _friendsList.toString();
         String displayMList = "Message List: " + _messagesList.toString();
-        String displayId = "ID: " + _id;
         
-        return _firstName + " " + _lastName  + "\n" + displayId + "\n"+ displayFList + "\n" + displayMList + "\n";
+        return displayFirstName + " " + displayLastName  + "\n" + displayId + "\n"+ displayFList + "\n" + displayMList + "\n";
     }
     
 }

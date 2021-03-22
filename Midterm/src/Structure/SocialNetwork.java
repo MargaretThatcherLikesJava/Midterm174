@@ -12,7 +12,7 @@ import People.*;
  * @author chee
  */
 public class SocialNetwork {
-    
+    /*
     public void createPerson(String first, String last) {
         
     }
@@ -44,4 +44,5 @@ public class SocialNetwork {
     public boolean areFriends(Person person1, Person person2) {
     
     }
+    */
 }
