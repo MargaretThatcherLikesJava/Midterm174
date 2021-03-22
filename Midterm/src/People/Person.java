@@ -11,13 +11,13 @@ import Interactions.*;
  *
  * @author chee
  */
-public class Person {
+public class Person implements Messagable {
     
     private String _firstName;
     private String _lastName;
     private static int _id;
     protected ArrayList<Person> _friendsList = new ArrayList<Person>();
-    protected ArrayList<String> _messagesList = new ArrayList<String>();
+    protected ArrayList<Message> _messagesList = new ArrayList<Message>();
     protected ArrayList<Person> _blockedList = new ArrayList<Person>();
     
     public Person(String firstName, String lastName) {
@@ -49,7 +49,7 @@ public class Person {
     }
     
     /**
-     * Check if the person is already blocked. Return true if so.
+     * Check if the person is blocked. Return true if so.
      * @param p
      * @return 
      */
@@ -59,8 +59,9 @@ public class Person {
             blocked = false;
         } 
         for (int i = 0; i < _blockedList.size(); i++) {
-            if (p == _blockedList.get(i)) {
+            if (p.equals(_blockedList.get(i))) {
                 blocked = true;
+                //System.out.println(p + "is BLOCKED  by " + this._firstName);
             }
         }
         return blocked;
@@ -71,13 +72,13 @@ public class Person {
      * @param p
      * @return 
      */
-    public boolean isDuplicate(Person p) {
+    public boolean isDuplicate(Person p, ArrayList<Person> pList) {
         boolean duplicate = false;
-        if (_friendsList == null) { // if friends list empty, not duplicate
+        if (pList == null) { // if friends list empty, not duplicate
             duplicate = false;
         }
-        for (int i = 0; i < _friendsList.size(); i++) {
-            if (p == _friendsList.get(i)) {
+        for (int i = 0; i < pList.size(); i++) {
+            if (p.equals(pList.get(i))) {
                 duplicate = true;
             }
         }
@@ -89,10 +90,9 @@ public class Person {
      * @param p
      * @return 
      */
-    
     public boolean addFriend(Person p) {
         boolean addedFriend = false;    
-        if (!isBlocked(p) && !isDuplicate(p)) { // check blocked, duplicate
+        if (!isBlocked(p) && !isDuplicate(p, _friendsList)) { // check blocked, duplicate
             addedFriend = true;
             this._friendsList.add(p);
             // ADD OTHER FRIEND
@@ -103,14 +103,40 @@ public class Person {
         return addedFriend;
     }
     
+    /**
+     * Adds one person object to another person's blocked list
+     * @param p
+     * @return boolean 
+     */
+    public boolean addBlock(Person p) {
+        boolean hasBlocked = false;
+        if(!isBlocked(p) && !isDuplicate(p, _blockedList)) {
+            this._blockedList.add(p);
+        } else {
+            hasBlocked = false;
+        }
+        return hasBlocked;
+    }
+    
+    public boolean receiveMessage(Message m, Person p) {
+        boolean receivedMessage = false;
+        if (!isBlocked(p)) {
+            _messagesList.add(m);
+            receivedMessage = true;
+        }
+        return receivedMessage;
+    }
+    
     public String toString() {
         String displayFirstName = _firstName;
         String displayLastName = _lastName;
         String displayId = "ID: " + _id;
         String displayFList = "Friends List: " + _friendsList.toString();
         String displayMList = "Message List: " + _messagesList.toString();
+        String displayBList = "Blocked List: " + _blockedList.toString();
         
-        return displayFirstName + " " + displayLastName  + "\n" + displayId + "\n"+ displayFList + "\n" + displayMList + "\n";
+        return displayFirstName + " " + displayLastName  + "\n" + displayId + "\n"+ displayFList + "\n" + displayMList + "\n"
+                + displayBList + "\n";
     }
     
 }

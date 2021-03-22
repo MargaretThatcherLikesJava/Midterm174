@@ -7,6 +7,7 @@
 
 package midterm;
 import People.*;
+import Structure.*;
 
 /**
  *
@@ -28,6 +29,20 @@ public class Midterm {
         System.out.println(person1);
         System.out.println(person2);
         */
+        
+        /*
+        person1.addBlock(person2);
+        System.out.println(person1);
+        boolean result = person1.isBlocked(person2);
+        System.out.println(result);
+        */
+        
+        SocialNetwork newSocial = new SocialNetwork();
+        newSocial.createPerson("george", "wash");
+        System.out.println(newSocial);
+        newSocial.createPerson("george", "wash");
+        System.out.println(newSocial);
+        
 
         
     }

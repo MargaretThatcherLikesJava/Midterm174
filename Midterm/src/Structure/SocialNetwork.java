@@ -5,6 +5,7 @@
  */
 package Structure;
 import java.util.*;
+
 import People.*;
 
 /**
@@ -12,37 +13,22 @@ import People.*;
  * @author chee
  */
 public class SocialNetwork {
-    /*
-    public void createPerson(String first, String last) {
+    
+    static ArrayList<Person> _peopleList = new ArrayList<Person>();    // List that holds all people
+    
+    public SocialNetwork() {
         
     }
     
-    public boolean sendMessage(Message message) {
-        
+    public boolean createPerson(String first, String last) {
+        boolean createdPerson = false;
+            Person newPerson = new Person(first, last);
+            _peopleList.add(newPerson);
+        return createdPerson;
     }
     
-    public boolean requestFriend(Person initiator, Person recipient) {
-    
+    public String toString() {
+        return _peopleList.toString() + "\n";
     }
     
-    public boolean block(Person initiator, Person recipient) {
-    
-    }
-    
-    public ArrayList[] listFriends(Person someone) {
-    
-    }
-    
-    public ArrayList[] listMessages(Person somone) {
-    
-    }
-    
-    public boolean unfriend(Person initiator, Person recipient) {
-    
-    }
-    
-    public boolean areFriends(Person person1, Person person2) {
-    
-    }
-    */
 }
